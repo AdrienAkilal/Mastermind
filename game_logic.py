@@ -1,6 +1,5 @@
 import random
 
-colors = []
 secret_combination = []
 user_combination = []
 length = 4
@@ -14,7 +13,7 @@ def generate_secret_combination(length):
 
 
 def input_user_combination(length):
-    """Demande à l'utilisateur de proposer une combinaison valide."""
+    """Demande à l'utilisateur de proposer une combinaison"""
     user_combination = []
     while len(user_combination) < length:
         try:
@@ -45,25 +44,28 @@ def verify_input_user(secret_combination, user_combination):
                     correct_colors += 1
                     secret_combination[j] = None
                     break 
-    if correct_positions == length:
-        message_end_game = "Bravo, vous êtes un boss"
-    elif correct_positions < length:
-        message_end_game = ("encore un effort vous avez " + str(correct_positions) + " positions correctes et " + str(correct_colors) + " bonnes couleurs")
-    print (message_end_game)
+        if correct_positions == length:
+            message_end_game = "Bravo, vous êtes un boss, la partie est maintentant terminée"
+            break
+        else:
+            message_end_game = ("encore un effort vous avez " + str(correct_positions) + " positions correctes et " + str(correct_colors) + " bonnes couleurs")
+    else :
+        message_end_game = "Bravo, vous êtes un boss, la partie est maintentant terminée"
+     
+    print (message_end_game)   
     return correct_positions, correct_colors
 
 
 
+#Boucle du jeu
 
-"""Boucle du jeu"""
+print("Hello les Masters du mind !")
+secret_combination = generate_secret_combination(length)
 
-secret_combination = [2, 1, 5, 3]
-user_combination = [2, 5, 1, 3]
-
-l = verify_input_user(secret_combination, user_combination)
-
-
-
+for attempt in range(1, attempts + 1):
+        user_combination = input_user_combination(length)
+        correct_positions, correct_colors = verify_input_user(secret_combination, user_combination)
+            
 
 
 
